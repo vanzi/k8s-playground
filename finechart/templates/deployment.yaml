@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: falcon-app
+  labels:
+    app: falcon-app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: falcon-app
+  template:
+    metadata:
+      labels:
+        app: falcon-app
+      annotations:
+        {{- if .Values.alwaysForceDeployment }}
+        timestamp: "{{ now | unixEpoch }}"
+        {{- end }}
+    spec:
+      containers:
+      - name: falcon-app
+        image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+        - app
+        ports:
+        - containerPort: 8000

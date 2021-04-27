@@ -1,0 +1,11 @@
+replicaCount: 1
+
+image:
+  name: falcon-app
+  tag: latest
+  repository: k3d-finecluster-registry:5000
+  pullPolicy: Always
+
+# include timestamp annotation to force re-deployment every time
+# should only be used with pullPolicy: Always
+alwaysForceDeployment: true

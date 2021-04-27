@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: falcon-migrate
+  labels:
+    app: falcon-migrate
+spec:
+  template:
+    spec:
+      containers:
+      - name: falcon-migrate
+        image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+        - migrate
+      restartPolicy: Never
+  backoffLimit: 3
