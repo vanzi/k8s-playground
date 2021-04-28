@@ -2,15 +2,16 @@
 
 Minimal local playground with a simple Python app packaged in a Docker image,
 wrapped as a Helm chart and deployed to a local Kubernetes cluster using k3d
-and its local image repository.
+and its local image registry.
 
 It supports a simple trick for forcing an application re-deployment on demand
 without any changes in configuration (i.e. rolling image tags).
 
 ## Setup
 
-* Install `docker`, `kubectl` and `k3d`.
-* Create a cluster (or recreate it if it exists):
+Install `docker`, `kubectl` and `k3d`.
+
+Create a cluster (or recreate it if it exists):
 ```bash
 ./scripts/recreate-cluster.sh
 ```
@@ -31,7 +32,7 @@ Make changes in the application and run:
 
 ## Teardown
 
-* Delete local cluster:
+Delete local cluster:
 ```bash
 k3d cluster delete finecluster
 ```
